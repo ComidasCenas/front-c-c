@@ -9,6 +9,19 @@
 // Be sure that you only ever include this mixin once!
 @include mat-core();
 
+@font-face {
+    font-family: "Gilroy-light";
+    font-style: normal;
+    src: url("assets/Gilroy-FREE/Gilroy-Light.otf") format("otf")
+}
+
+@font-face {
+    font-family: "Gilroy-bold";
+    font-style: normal;
+    font-weight: bold;
+    src: url("assets/Gilroy-FREE/Gilroy-ExtraBold.otf") format("otf");
+}
+
 $md-mcgpalette0: (
     50 : #f5e2e2,
     100 : #e7b7b7,
@@ -132,4 +145,4 @@ $front-c-c-theme: mat-light-theme($front-c-c-primary, $front-c-c-accent, $front-
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Gilroy-Light; }
+body { margin: 0; font-family: "Gilroy-light" }
