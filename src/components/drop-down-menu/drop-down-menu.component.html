@@ -1,0 +1,23 @@
+<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="navigation menu" class="menu-button">
+  <img src="assets/images/menu.png" alt="menu" class="menu-icon" srcset="">
+</button>
+
+<mat-menu #menu="matMenu" [hasBackdrop]="true" class="menu">
+  <button mat-menu-item [matMenuTriggerFor]="option1">
+    <span class="menu-options">Opcion 1</span>
+  </button>
+  <button mat-menu-item [matMenuTriggerFor]="option2">
+    <span class="menu-options">Opcion 2</span>
+  </button>
+</mat-menu>
+
+<mat-menu #option1="matMenu" [hasBackdrop]="true" class="menu">
+  <button mat-menu-item><span class="menu-options">Opcion 11</span></button>
+  <button mat-menu-item><span class="menu-options">Opcion 12</span></button>
+</mat-menu>
+
+<mat-menu #option2="matMenu" [hasBackdrop]="true" class="menu">
+  <button mat-menu-item><span class="menu-options">Opcion 21</span></button>
+  <button mat-menu-item><span class="menu-options">Opcion 22</span></button>
+</mat-menu>
+
