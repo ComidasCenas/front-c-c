@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./drop-down-menu.component.scss']
 })
 export class DropDownMenuComponent {
-  constructor() { }
+  public menuConfig = null; 
 }

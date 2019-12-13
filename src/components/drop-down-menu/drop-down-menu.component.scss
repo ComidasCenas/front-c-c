@@ -5,11 +5,33 @@ $accent-color: var(--accent-color, white);
   border: 0px;
 }
 
-::ng-deep .menu {
+::ng-deep .menu-background {
+  padding: 0px 14px;
   background-color: $primary-color;
+
+  .mat-menu-item-submenu-trigger::after {
+    color: $accent-color;
+  }
 }
 
 .menu-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid $accent-color;
+  width: 186px;
+
+  &.sub-menu {
+    width: 125px;
+  }
+
+  &.last {
+    border-bottom: 0px;
+  }
+}
+
+.menu-text {
   color: $accent-color;
+  font-family: "Gilroy-light";
   font-weight: 800;
 }
