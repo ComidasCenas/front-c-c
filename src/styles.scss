@@ -148,6 +148,7 @@ html, body {
     --primary-color: #AE0F0F;
     --accent-color: #FFFFFF;
     --third-color: #D8D8D8;
+    --font-family: "Gilroy-light";
     height: 100%;
 }
-body { margin: 0; font-family: "Gilroy-light" }
+body { margin: 0; font-family: var(--font-family) }

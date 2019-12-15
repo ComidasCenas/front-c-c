@@ -1,12 +1,9 @@
-<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="navigation menu" class="menu-button">
+<!--<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="navigation menu" class="menu-button">
   <img src="assets/images/menu.png" alt="menu" class="menu-icon" srcset="">
 </button>
 
 <mat-menu #menu="matMenu" class="menu-background">
-  <button mat-menu-item [matMenuTriggerFor]="option1" class="menu-options">
-    <img src="assets/images/chicken-menu-icon.png" alt="chiken" srcset="">
-    <span class="menu-text">Opcion 1</span>
-  </button>
+  <cc-drop-down-option></cc-drop-down-option>
   <button mat-menu-item [matMenuTriggerFor]="option2" class="menu-options last">
     <img src="assets/images/menu-menu-icon.png" alt="menu" srcset="">
     <span class="menu-text">Opcion 2</span>
@@ -33,4 +30,12 @@
     <img src="assets/images/lens-menu-icon.png" alt="create" srcset="">
     <span class="menu-text">Opcion 22</span>
   </button>
-</mat-menu>  
+</mat-menu>-->
+
+<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="navigation menu" class="menu-button">
+  <img src="assets/images/menu.png" alt="menu" class="menu-icon" srcset="">
+</button>
+
+<mat-menu #menu="matMenu" class="menu-background">
+  <ng-template cc-add-host></ng-template>
+</mat-menu>
