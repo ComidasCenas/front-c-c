@@ -1,6 +1,12 @@
-<button mat-menu-item class="menu-options" [ngClass]="{'last': last, 'sub-menu': subMenu}">
-  <img src="{{optionConfig.icon}}" alt="chiken" srcset="">
-  <span class="menu-text">{{optionConfig.text}}</span>
-</button>
-
-<ng-template cc-add-host></ng-template>
+<ng-container *ngIf="subMatMenu; else elseTemplate">
+  <button mat-menu-item class="menu-options sub-menu" [matMenuTriggerFor]="subMatMenu" [ngClass]="{'last': last}">
+    <img src="{{optionConfig.icon}}" alt="chiken" srcset="">
+    <span class="menu-text">{{optionConfig.text}}</span>
+  </button>
+</ng-container>
+<ng-template #elseTemplate>
+  <button mat-menu-item class="menu-options" [ngClass]="{'last': last}">
+    <img src="{{optionConfig.icon}}" alt="chiken" srcset="">
+    <span class="menu-text">{{optionConfig.text}}</span>
+  </button>
+</ng-template>

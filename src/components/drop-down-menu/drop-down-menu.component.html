@@ -32,10 +32,8 @@
   </button>
 </mat-menu>-->
 
-<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="navigation menu" class="menu-button">
+<button mat-icon-button [matMenuTriggerFor]="matMenu" aria-label="navigation menu" class="menu-button">
   <img src="assets/images/menu.png" alt="menu" class="menu-icon" srcset="">
 </button>
 
-<mat-menu #menu="matMenu" class="menu-background">
-  <ng-template cc-add-host></ng-template>
-</mat-menu>
+<ng-template cc-add-host></ng-template>

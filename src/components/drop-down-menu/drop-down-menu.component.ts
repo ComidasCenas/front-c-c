@@ -5,9 +5,10 @@ import {
   OnInit
 } from '@angular/core';
 
-import { Option, MenuConfig } from './drop-down-menu.entities';
-import { DropDownOptionComponent } from './drop-down-option.component';
+import { MenuConfig, MenuInstance } from './drop-down-menu.entities';
 import { AddHostDirective } from '../ad-host';
+import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
+import { SubMenuComponent } from './submenu.component';
 
 @Component({
   selector: 'cc-drop-down-menu',
@@ -16,67 +17,80 @@ import { AddHostDirective } from '../ad-host';
 })
 export class DropDownMenuComponent implements OnInit {
   public menuConfig: MenuConfig = {
-    id: 'menu',
     icon: 'assets/images/menu.png',
-    options: [
-      {
-        id: 'option1',
+    tree: {
+      main: ['option1', 'option2'],
+      option1: ['option11', 'option12'],
+      option2: ['option21', 'option22']
+    },
+    options: {
+      option1: {
         icon: 'assets/images/chicken-menu-icon.png',
-        text: 'Opcion 1',
-        options: [
-          {
-            id: 'option11',
-            icon: 'assets/images/cross-menu-icon.png',
-            text: 'Opcion 11'
-          },
-          {
-            id: 'options12',
-            icon: 'assets/images/lens-menu-icon.png',
-            text: 'Opcion 12'
-          }
-        ]
+        text: 'Opcion 1'
       },
-      {
-        id: 'option2',
+      option2: {
         icon: 'assets/images/menu-menu-icon.png',
-        text: 'Opcion 2',
-        options: [
-          {
-            id: 'option21',
-            icon: 'assets/images/cross-menu-icon.png',
-            text: 'Opcion 21'
-          },
-          {
-            id: 'option22',
-            icon: 'assets/images/lens-menu-icon.png',
-            text: 'Opcion 22'
-          }
-        ]
+        text: 'Opcion 2'
+      },
+      option11: {
+        icon: 'assets/images/cross-menu-icon.png',
+        text: 'Opcion 11',
+        event: 'option11'
+      },
+      option12: {
+        icon: 'assets/images/lens-menu-icon.png',
+        text: 'Opcion 12',
+        event: 'option12'
+      },
+      option21: {
+        icon: 'assets/images/cross-menu-icon.png',
+        text: 'Opcion 21',
+        event: 'option21'
+      },
+      option22: {
+        icon: 'assets/images/lens-menu-icon.png',
+        text: 'Opcion 22',
+        event: 'option22'
       }
-    ]
-  }; 
+    }
+  };
 
   @ViewChild(AddHostDirective, { static: true })
-  private optionsContainer: AddHostDirective;
+  private addHost: AddHostDirective;
+
+  public matMenu: MatMenu;
 
   constructor(
     private cfr: ComponentFactoryResolver
   ) {}
   
   ngOnInit() {
-    this.buildOption();
+    this.matMenu = this.buildOption(this.menuConfig.tree.main);
   }
 
-  private buildOption() {
-    const optionFactory = this.cfr.resolveComponentFactory(DropDownOptionComponent);
-    const leng = this.menuConfig.options.length;
-    this.optionsContainer.viewContainerRef.clear();
-    
-    for (let i=0; i < leng; i++) {
-      const componentRef = this.optionsContainer.viewContainerRef.createComponent(optionFactory);
-      (<DropDownOptionComponent> componentRef.instance).optionConfig = this.menuConfig.options[i];
-      (<DropDownOptionComponent> componentRef.instance).last = (i === leng - 1);
+
+  private buildOption(menu: string[]): MatMenu {
+    const menuInstance: MenuInstance[] = [];
+
+    for (const optKey of menu) {
+      let optInstance: MenuInstance = {
+        option: this.menuConfig.options[optKey]
+      };
+
+      if (this.menuConfig.tree[optKey]) {
+        optInstance.subMenu = this.buildOption(this.menuConfig.tree[optKey]);
+      }
+
+      menuInstance.push(optInstance);
     }
+
+    const menuComponentFactory = this.cfr.resolveComponentFactory(SubMenuComponent);
+    const menuComponentRef = this.addHost.viewContainerRef.createComponent(menuComponentFactory);
+    const menuComponentInstance: SubMenuComponent = menuComponentRef.instance;
+
+    menuComponentInstance.menu = menuInstance;
+
+    return menuComponentInstance.matMenu;
   }
 
 }

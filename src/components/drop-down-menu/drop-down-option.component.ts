@@ -2,9 +2,13 @@ import {
   Component,
   Input,
   OnInit,
+  AfterContentInit,
+  AfterViewInit,
+  ViewChild
 } from '@angular/core';
 
 import { Option } from './drop-down-menu.entities';
+import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   selector: 'cc-drop-down-option',
@@ -19,9 +23,16 @@ export class DropDownOptionComponent implements OnInit {
   public last = false;
 
   @Input()
-  public subMenu = false;
+  public subMatMenu: MatMenu;
+
+  @ViewChild(MatMenuTrigger, { static: true})
+  private menuTrigger: MatMenuTrigger
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.menuTrigger) {
+      this.menuTrigger.menu = this.subMatMenu;
+    }
+  }
 }
