@@ -1,23 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatMenuModule } from '@angular/material/menu';
 
-import {
-  DropDownMenuComponent,
-  DropDownOptionComponent,
-  SubMenuComponent
-} from './drop-down-menu';
-import { AddHostDirective } from './ad-host';
+import { DropDownMenuComponent } from './drop-down-menu';
+import { DropDownOptionComponent } from './drop-down-option';
 
 @NgModule({
-  declarations: [
-    DropDownMenuComponent,
-    AddHostDirective,
-    DropDownOptionComponent,
-    SubMenuComponent
-  ],
-  imports: [ CommonModule, MatMenuModule ],
-  entryComponents: [ DropDownOptionComponent, SubMenuComponent ],
-  exports: [ DropDownMenuComponent, AddHostDirective ],
+  declarations: [ DropDownMenuComponent, DropDownOptionComponent ],
+  imports: [ CommonModule ],
+  exports: [ DropDownMenuComponent, DropDownOptionComponent ]
 })
 export class ComponentsModule {}

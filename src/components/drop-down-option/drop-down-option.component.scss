@@ -1,0 +1,22 @@
+$mainFont: var(--font-family, "Gilroy-ligth");
+$accet-color: var(--accent-color, black);
+$font-size: var(--normal-font-size, 14px);
+
+.option-frame {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  cursor: pointer;
+}
+
+.option-frame:focus {
+  outline: none;
+  border: $accet-color solid 1px;
+}
+
+.option-text {
+  color: $accet-color;
+  font-family: $mainFont;
+  font-size: $font-size;
+}
