@@ -3,10 +3,17 @@ import { CommonModule } from '@angular/common';
 
 import { DropDownMenuComponent } from './drop-down-menu';
 import { DropDownOptionComponent } from './drop-down-option';
+import { SubmenuComponent } from './submenu';
+
+const components = [
+  DropDownMenuComponent,
+  DropDownOptionComponent,
+  SubmenuComponent
+]
 
 @NgModule({
-  declarations: [ DropDownMenuComponent, DropDownOptionComponent ],
+  declarations: [ ...components ],
   imports: [ CommonModule ],
-  exports: [ DropDownMenuComponent, DropDownOptionComponent ]
+  exports: [ ...components ]
 })
 export class ComponentsModule {}

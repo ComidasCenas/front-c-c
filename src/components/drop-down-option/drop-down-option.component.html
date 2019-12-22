@@ -1,8 +1,27 @@
-<div class="option-frame"
-tabindex="0"
-(click)="optionClicked($event)"
-(keyup)="optionEnter($event)"
->
-  <img src="{{optionConfig.icon}}" class="option-icon" alt="chicken-icon" srcset="">
-  <span class="option-text">{{optionConfig.text}}</span>
-</div>
+<ng-container *ngIf="optionConfig.subMenu; else elseTemplate">
+  <div class="option-frame"
+  tabindex="0"
+  [ngClass]="{'last': last}"
+  #optionRef >
+    <img src="{{optionConfig.icon}}" class="option-icon" alt="chicken-icon" srcset="">
+    <span class="submenu"></span>
+    <span class="option-text">{{optionConfig.text}}</span>
+  </div>
+  <cc-submenu
+  [subMenuOptions]="optionConfig.subMenu"
+  [posX]="posX"
+  [posY]="posY"
+  ></cc-submenu>
+</ng-container>
+<ng-template #elseTemplate>
+  <div class="option-frame"
+  tabindex="0"
+  [ngClass]="{'last': last}"
+  (click)="optionClicked($event)"
+  (keyup)="optionEnter($event)"
+  #optionRef
+  >
+    <img src="{{optionConfig.icon}}" class="option-icon" alt="chicken-icon" srcset="">
+    <span class="option-text">{{optionConfig.text}}</span>
+  </div>  
+</ng-template>

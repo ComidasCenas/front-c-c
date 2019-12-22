@@ -1,0 +1,9 @@
+<div class="submenu active"
+[ngStyle]="{'height.px': heightCalculated, 'left.px': _posX, 'top.px': posY}"
+>
+ <cc-drop-down-option 
+ *ngFor="let option of subMenuOptions; last as isLast"
+ [optionConfig] = "option"
+ [last] = "isLast"
+ ></cc-drop-down-option>
+</div>
