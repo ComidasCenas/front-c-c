@@ -11,6 +11,7 @@
   [subMenuOptions]="optionConfig.subMenu"
   [posX]="posX"
   [posY]="posY"
+  (optionEmit)="subMenuEmit($event)"
   ></cc-submenu>
 </ng-container>
 <ng-template #elseTemplate>

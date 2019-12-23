@@ -37,4 +37,8 @@ export class DropDownOptionComponent implements AfterViewInit{
       this.optionSelected.emit(this.optionConfig.event);
     }
   }
+
+  public subMenuEmit(event) {
+    this.optionSelected.emit(event);
+  }
 }

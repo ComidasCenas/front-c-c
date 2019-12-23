@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChildren, Output, EventEmitter } from '@angular/core';
 
-import { Option } from '../drop-down-option';
+import { Option, DropDownOptionComponent } from '../drop-down-option';
 
 @Component({
   selector: 'cc-submenu',
@@ -13,6 +13,7 @@ export class SubmenuComponent implements OnInit {
   private static MENU_PADDING = 11;
   private static SUBMENU_PADDING = (14 + 16);
 
+
   @Input()
   public subMenuOptions: Option[];
 
@@ -24,6 +25,9 @@ export class SubmenuComponent implements OnInit {
   @Input()
   public posY = 0;
 
+  @Output()
+  public optionEmit: EventEmitter<string> = new EventEmitter<string>();
+
   public _posX = 0;
   public heightCalculated = 0;
 
@@ -31,6 +35,10 @@ export class SubmenuComponent implements OnInit {
   ngOnInit() {
     const leng = this.subMenuOptions.length;
     this.heightCalculated = 40 * leng;
+  }
+
+  public optionSelected(event) {
+    this.optionEmit.emit(event);
   }
 
 }
