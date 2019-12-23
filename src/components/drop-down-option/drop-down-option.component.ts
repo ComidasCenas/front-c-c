@@ -17,6 +17,15 @@ export class DropDownOptionComponent implements AfterViewInit{
   @Output()
   public optionSelected: EventEmitter<string> = new EventEmitter<string>();
 
+  @Output()
+  public optionFocus: EventEmitter<string> = new EventEmitter<string>();
+
+  @Output()
+  public setFocusNext: EventEmitter<string> = new EventEmitter<string>();
+
+  @Output()
+  public setFocusPrev: EventEmitter<string> = new EventEmitter<string>();
+
   @ViewChildren('optionRef')
   option: QueryList<ElementRef>;
 
@@ -32,13 +41,31 @@ export class DropDownOptionComponent implements AfterViewInit{
     this.optionSelected.emit(this.optionConfig.event);
   }
 
-  private optionEnter(event) {
-    if (event.key === 'Enter') {
-      this.optionSelected.emit(this.optionConfig.event);
+  private optionKeyUp(event) {
+    switch(event.key) {
+      case 'ArrowDown':
+        this.setFocusNext.emit(this.optionConfig.event);
+        break;
+      case 'ArrowUp':
+        this.setFocusPrev.emit(this.optionConfig.event);
+        break;
+      case 'Enter':
+        if (!this.optionConfig.subMenu) {
+          this.optionSelected.emit(this.optionConfig.event);
+        }
+        break;
     }
   }
 
   public subMenuEmit(event) {
     this.optionSelected.emit(event);
+  }
+
+  public onFocusEvent() {
+    this.optionFocus.emit(this.optionConfig.event);
+  }
+
+  public setFocus() {
+    this.option.first.nativeElement.focus();
   }
 }

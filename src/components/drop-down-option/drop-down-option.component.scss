@@ -18,7 +18,16 @@ $font-size: var(--normal-font-size, 14px);
 
 .option-frame:focus {
   outline: none;
-  border: $accet-color solid 1px;
+}
+
+.option-frame:focus .option-text {
+  font-weight: bold;
+  font-size: ($font-size + 4);
+}
+
+.option-frame:focus .option-icon {
+  border: 1px solid $accet-color;
+  border-radius: 4px;
 }
 
 .option-text {

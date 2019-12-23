@@ -11,7 +11,10 @@ const defaultOption: Option = {
 }
 
 const actions = {
-  onOptionSelected: action('onOptionSelected')
+  onOptionSelected: action('onOptionSelected'),
+  onOptionFocus: action('onOptionFocus'),
+  onOptionNext: action('onOptionNext'),
+  onOptionPrev: action('onOptionPrev')
 }
 
 storiesOf('Option drop down', module)
@@ -42,13 +45,19 @@ storiesOf('Option drop down', module)
         [last]="true"
         style="width: 100%;"
         (optionSelected)="onOptionSelected($event)"
+        (optionFocus)="onOptionFocus($event)"
+        (setFocusNext)="onOptionNext($event)"
+        (setFocusPrev)="onOptionPrev($event)"
         ></cc-drop-down-option>
       </div>
     </div>
   `,
   props: {
     defaultOption: defaultOption,
-    onOptionSelected: actions.onOptionSelected
+    onOptionSelected: actions.onOptionSelected,
+    onOptionFocus: actions.onOptionFocus,
+    onOptionNext: actions.onOptionNext,
+    onOptionPrev: actions.onOptionPrev
   }
 }))
 .add('subMenu', () => ({
@@ -73,6 +82,9 @@ storiesOf('Option drop down', module)
      [last]="true"
      style="width: 100%;"
      (optionSelected)="onOptionSelected($event)"
+     (optionFocus)="onOptionFocus($event)"
+     (setFocusNext)="onOptionNext($event)"
+     (setFocusPrev)="onOptionPrev($event)"
      ></cc-drop-down-option>
    </div>
  </div>
@@ -90,6 +102,9 @@ storiesOf('Option drop down', module)
         event: 'option12'
       }]
     },
-    onOptionSelected: actions.onOptionSelected
+    onOptionSelected: actions.onOptionSelected,
+    onOptionFocus: actions.onOptionFocus,
+    onOptionNext: actions.onOptionNext,
+    onOptionPrev: actions.onOptionPrev
   }
 }))
