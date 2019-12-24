@@ -144,5 +144,12 @@ $front-c-c-theme: mat-light-theme($front-c-c-primary, $front-c-c-accent, $front-
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: "Gilroy-light" }
+html, body {
+    --primary-color: #AE0F0F;
+    --accent-color: #FFFFFF;
+    --third-color: #D8D8D8;
+    --font-family: "Gilroy-light";
+    --normal-font-size: 14px;
+    height: 100%;
+}
+body { margin: 0; font-family: var(--font-family) }

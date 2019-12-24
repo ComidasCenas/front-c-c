@@ -1,0 +1,35 @@
+<ng-container *ngIf="optionConfig.subMenu; else elseTemplate">
+  <div class="option-frame"
+  tabindex="0"
+  [ngClass]="{'last': last}"
+  (focus)="onFocusEvent($event)"
+  (keyup)="optionKeyUp($event)"
+  #optionRef >
+    <img src="{{optionConfig.icon}}" class="option-icon" alt="chicken-icon" srcset="">
+    <span class="submenu"></span>
+    <span class="option-text">{{optionConfig.text}}</span>
+  </div>
+  <cc-submenu
+  [@openCloseSubMenu]
+  *ngIf="isSubmenuOpen"
+  [setFocus]="firstOptionIndex"
+  [subMenuOptions]="optionConfig.subMenu"
+  [posX]="posX"
+  [posY]="posY"
+  (optionEmit)="subMenuEmit($event)"
+  (returnFocus)="setFocus()"
+  ></cc-submenu>
+</ng-container>
+<ng-template #elseTemplate>
+  <div class="option-frame"
+  tabindex="0"
+  [ngClass]="{'last': last}"
+  (click)="optionClicked($event)"
+  (keyup)="optionKeyUp($event)"
+  (focus)="onFocusEvent($event)"
+  #optionRef
+  >
+    <img src="{{optionConfig.icon}}" class="option-icon" alt="chicken-icon" srcset="">
+    <span class="option-text">{{optionConfig.text}}</span>
+  </div>  
+</ng-template>
