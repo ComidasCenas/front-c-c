@@ -1,14 +1,15 @@
-<button class="menu-button">
+<button class="menu-button" (click)="menuOpen = !menuOpen">
   <img src="{{config.icon}}" alt="menu button" srcset="">
 </button>
 <div
 class="menu-options"
+*ngIf="menuOpen"
+[@openCloseMenu]
 [ngStyle]="{'height.px': menuHeight, 'left.px': menuPosX, 'top.px': menuPosY}"
 >
 <cc-drop-down-option
 *ngFor="let option of config.options; last as isLast"
 [optionConfig] = "option"
 [last]="isLast"
-></cc-drop-down-option
-  >
+></cc-drop-down-option>
 </div>
