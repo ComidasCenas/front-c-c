@@ -12,10 +12,12 @@
   <cc-submenu
   [@openCloseSubMenu]
   *ngIf="isSubmenuOpen"
+  [setFocus]="firstOptionIndex"
   [subMenuOptions]="optionConfig.subMenu"
   [posX]="posX"
   [posY]="posY"
   (optionEmit)="subMenuEmit($event)"
+  (returnFocus)="setFocus()"
   ></cc-submenu>
 </ng-container>
 <ng-template #elseTemplate>

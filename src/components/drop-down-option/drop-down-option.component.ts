@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ViewChildren, ElementRef, AfterViewInit, QueryList } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChildren, ElementRef, AfterViewInit, QueryList, Optional } from '@angular/core';
 
 import { Option } from './drop-down-option.entities';
 import { trigger, style, state, transition, animate } from '@angular/animations';
@@ -15,7 +15,7 @@ import { trigger, style, state, transition, animate } from '@angular/animations'
       ]),
       transition(':leave',[
         style({ opacity: 1 }),
-				animate('1s ease-in', style({ opacity: 0 }))
+				animate('0.3s ease-in', style({ opacity: 0 }))
       ])
     ])
   ]
@@ -42,11 +42,16 @@ export class DropDownOptionComponent implements AfterViewInit{
   @Output()
   public setFocusPrev: EventEmitter<string> = new EventEmitter<string>();
 
+  @Output()
+  public setFocusParent: EventEmitter<string> = new EventEmitter<string>();
+
+
   @ViewChildren('optionRef')
   option: QueryList<ElementRef>;
 
   public posX = 0;
   public posY = 0;
+  public firstOptionIndex = -1;
 
   ngAfterViewInit() {
     this.posX = this.option.first.nativeElement.offsetLeft;
@@ -58,6 +63,7 @@ export class DropDownOptionComponent implements AfterViewInit{
   }
 
   private optionKeyUp(event) {
+    console.log(event.key);
     switch(event.key) {
       case 'ArrowDown':
         this.setFocusNext.emit(this.optionConfig.event);
@@ -70,6 +76,19 @@ export class DropDownOptionComponent implements AfterViewInit{
           this.optionSelected.emit(this.optionConfig.event);
         }
         break;
+      case 'ArrowLeft':
+        if (this.optionConfig.subMenu) {
+          this.removeFocus();
+          this.firstOptionIndex = 0;
+        }
+      break;
+      case 'ArrowRight':
+        if (!this.optionConfig.subMenu) {
+          this.firstOptionIndex;
+          this.setFocus();
+          this.setFocusParent.emit(this.optionConfig.event);
+        }
+      break;
     }
   }
 
@@ -84,6 +103,11 @@ export class DropDownOptionComponent implements AfterViewInit{
   }
 
   public setFocus() {
+    this.firstOptionIndex = -1;
     this.option.first.nativeElement.focus();
+  }
+
+  public removeFocus() {
+    this.option.first.nativeElement.blur();
   }
 }

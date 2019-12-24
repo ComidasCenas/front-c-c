@@ -30,11 +30,37 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input()
   public posY = 0;
 
+  @Input()
+  set setFocus(pos) {
+    console.log('Set position');
+    if (this.optionComponents) {
+      console.log('Select element:' ,pos);
+      const options = this.optionComponents.toArray();
+      const leng = options.length;
+  
+      if ((pos > -1) && (pos < leng)) {
+        this.setFocusOnOption(options[pos]);
+        this.index = pos;
+      } else {
+        for(const option of options) {
+          option.removeFocus();
+        }
+      }
+    }
+  }
+
+
   @Output()
   public optionEmit: EventEmitter<string> = new EventEmitter<string>();
 
+  @Output()
+  public returnFocus: EventEmitter<string> = new EventEmitter<string>();
+
   public _posX = 0;
   public heightCalculated = 0;
+
+  private index = 0;
+
 
 
   ngOnInit() {
@@ -46,28 +72,32 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
     this.optionComponents.forEach(
       (option: DropDownOptionComponent, index: number, listOptions: DropDownOptionComponent[]) => {
         const subscriptionNext = option.setFocusNext.subscribe(
-          () => { 
-            const iOpt = index + 1;
+          () => {
             const leng = listOptions.length;
+            this.index = Math.abs(this.index + 1) % leng;
 
-            if (iOpt < leng) {
-              this.setFocusOnOption(listOptions[iOpt]);
-            }
+            this.setFocusOnOption(listOptions[this.index]);
           }
         );
 
         const subcriptionPrev = option.setFocusPrev.subscribe(
           () => {
-            const iOpt = index - 1;
+            const leng = listOptions.length;
+            this.index = Math.abs(this.index - 1 % leng);
             
-            if (iOpt > -1) {
-              this.setFocusOnOption(listOptions[iOpt]);
-            }
+            this.setFocusOnOption(listOptions[this.index]);
+          }
+        )
+
+        const subcriptionReturnFocus = option.setFocusParent.subscribe(
+          (event) => {
+            this.returnFocus.emit(event);
           }
         )
 
         this.optionsSubscriptions.push(subscriptionNext);
         this.optionsSubscriptions.push(subcriptionPrev);
+        this.optionsSubscriptions.push(subcriptionReturnFocus);
       }
     )
   }
