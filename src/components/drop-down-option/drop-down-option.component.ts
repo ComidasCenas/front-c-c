@@ -1,11 +1,24 @@
 import { Component, Input, Output, EventEmitter, ViewChildren, ElementRef, AfterViewInit, QueryList } from '@angular/core';
 
 import { Option } from './drop-down-option.entities';
+import { trigger, style, state, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'cc-drop-down-option',
   templateUrl: './drop-down-option.component.html',
-  styleUrls: ['./drop-down-option.component.scss']
+  styleUrls: ['./drop-down-option.component.scss'],
+  animations: [
+    trigger('openCloseSubMenu',[
+      transition(':enter', [
+        style({ opacity: 0 }),
+				animate('1s ease-out', style({ opacity: 1 }))
+      ]),
+      transition(':leave',[
+        style({ opacity: 1 }),
+				animate('1s ease-in', style({ opacity: 0 }))
+      ])
+    ])
+  ]
 })
 export class DropDownOptionComponent implements AfterViewInit{
   @Input()
@@ -13,6 +26,9 @@ export class DropDownOptionComponent implements AfterViewInit{
 
   @Input()
   public last = false;
+
+  @Input()
+  public isSubmenuOpen = false;
 
   @Output()
   public optionSelected: EventEmitter<string> = new EventEmitter<string>();
@@ -58,10 +74,12 @@ export class DropDownOptionComponent implements AfterViewInit{
   }
 
   public subMenuEmit(event) {
+    this.isSubmenuOpen = false;
     this.optionSelected.emit(event);
   }
 
   public onFocusEvent() {
+    this.isSubmenuOpen = true;
     this.optionFocus.emit(this.optionConfig.event);
   }
 

@@ -10,6 +10,8 @@
     <span class="option-text">{{optionConfig.text}}</span>
   </div>
   <cc-submenu
+  [@openCloseSubMenu]
+  *ngIf="isSubmenuOpen"
   [subMenuOptions]="optionConfig.subMenu"
   [posX]="posX"
   [posY]="posY"

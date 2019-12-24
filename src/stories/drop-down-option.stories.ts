@@ -1,4 +1,5 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { action } from '@storybook/addon-actions';
 
 import { ComponentsModule, Option } from '../components';
@@ -20,7 +21,7 @@ const actions = {
 storiesOf('Option drop down', module)
 .addDecorator(
   moduleMetadata({
-    imports: [ ComponentsModule ]
+    imports: [ ComponentsModule, BrowserAnimationsModule ]
   })
 )
 .add('default', () => ({
