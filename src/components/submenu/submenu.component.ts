@@ -13,6 +13,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
   private static WIDTH = 125;
   private static MENU_PADDING = 11;
   private static SUBMENU_PADDING = (14 + 16);
+  private static OPTION_HEIGHT = 50;
 
   @ViewChildren(DropDownOptionComponent)
   private optionComponents: QueryList<DropDownOptionComponent>;
@@ -32,9 +33,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Input()
   set setFocus(pos) {
-    console.log('Set position');
     if (this.optionComponents) {
-      console.log('Select element:' ,pos);
       const options = this.optionComponents.toArray();
       const leng = options.length;
   
@@ -65,7 +64,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     const leng = this.subMenuOptions.length;
-    this.heightCalculated = 40 * leng;
+    this.heightCalculated = SubmenuComponent.OPTION_HEIGHT * leng;
   }
 
    ngAfterViewInit() {
@@ -114,6 +113,10 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public optionSelected(event) {
     this.optionEmit.emit(event);
+  }
+
+  public setIndexFocus(index){
+    this.index = index;
   }
 
 }

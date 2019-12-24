@@ -1,0 +1,17 @@
+$primary-color: var(--primary-color, red);
+$accent-color: var(--accent-color, white);
+$mainFont: var(--font-family, "Gilroy-ligth");
+$font-size: var(--normal-font-size, 14px);
+
+.menu-button {
+  border: 0px;
+}
+
+.menu-options {
+  position: absolute;
+  background-color: $primary-color;
+  width: 186px;
+  z-index: 99;
+  border-radius: 4px;
+  padding: 0px 18px 14px 11px;
+}

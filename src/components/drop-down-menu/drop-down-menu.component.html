@@ -1,3 +1,14 @@
 <button class="menu-button">
-  <img src="assets/images/menu.png" alt="menu button" srcset="">
+  <img src="{{config.icon}}" alt="menu button" srcset="">
 </button>
+<div
+class="menu-options"
+[ngStyle]="{'height.px': menuHeight, 'left.px': menuPosX, 'top.px': menuPosY}"
+>
+<cc-drop-down-option
+*ngFor="let option of config.options; last as isLast"
+[optionConfig] = "option"
+[last]="isLast"
+></cc-drop-down-option
+  >
+</div>

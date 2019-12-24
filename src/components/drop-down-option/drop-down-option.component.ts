@@ -63,7 +63,6 @@ export class DropDownOptionComponent implements AfterViewInit{
   }
 
   private optionKeyUp(event) {
-    console.log(event.key);
     switch(event.key) {
       case 'ArrowDown':
         this.setFocusNext.emit(this.optionConfig.event);

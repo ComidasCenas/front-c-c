@@ -10,6 +10,7 @@ $font-size: var(--normal-font-size, 14px);
   height: 40px;
   cursor: pointer;
   border-bottom: solid 2px $accet-color;
+  padding: 5px 0px;
 
   &.last {
     border-bottom: solid transparent 0px;
