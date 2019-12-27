@@ -1,15 +1,15 @@
-<button class="menu-button" (click)="menuOpen = !menuOpen">
+<button
+  class="menu-button"
+  (click)="menuOpen = !menuOpen"
+  (keyup)="setFocusOption($event)"
+>
   <img src="{{config.icon}}" alt="menu button" srcset="">
 </button>
-<div
-class="menu-options"
-*ngIf="menuOpen"
-[@openCloseMenu]
-[ngStyle]="{'height.px': menuHeight, 'left.px': menuPosX, 'top.px': menuPosY}"
->
-<cc-drop-down-option
-*ngFor="let option of config.options; last as isLast"
-[optionConfig] = "option"
-[last]="isLast"
-></cc-drop-down-option>
-</div>
+<cc-menu
+  [options]="config.options"
+  [focusOption]="index"
+  *ngIf="menuOpen"
+  (mouseleave)="onMouseLeave($event)"
+  (optionSelected)="onOptionSelected($event)"
+  [@openCloseMenu]
+></cc-menu>

@@ -73,7 +73,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
         const subscriptionNext = option.setFocusNext.subscribe(
           () => {
             const leng = listOptions.length;
-            this.index = Math.abs(this.index + 1) % leng;
+            this.index = Math.abs((this.index + 1) % leng);
 
             this.setFocusOnOption(listOptions[this.index]);
           }
@@ -82,7 +82,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
         const subcriptionPrev = option.setFocusPrev.subscribe(
           () => {
             const leng = listOptions.length;
-            this.index = Math.abs(this.index - 1 % leng);
+            this.index = Math.abs((this.index - 1) % leng);
             
             this.setFocusOnOption(listOptions[this.index]);
           }

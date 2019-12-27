@@ -1,7 +1,9 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
+import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ComponentsModule, MenuConfig } from '../components';
+import { action } from '@storybook/addon-actions';
 
 const defaultOption: MenuConfig = {
   icon: 'assets/images/menu.png',
@@ -56,10 +58,14 @@ const defaultOption: MenuConfig = {
   ]
 }
 
+const actions = {
+  onOptionSelected: action('onOptionSelected')
+}
+
 storiesOf('Menu drop down', module)
 .addDecorator(
   moduleMetadata({
-    imports: [ ComponentsModule, BrowserAnimationsModule ]
+    imports: [ CommonModule, ComponentsModule, BrowserAnimationsModule ]
   })
 )
 .add('default', () => ({
@@ -69,11 +75,13 @@ storiesOf('Menu drop down', module)
       [config]="defaultOption"
       [menuPosX]="1240"
       [menuPosY]="28"
+      (optionSelected)="onOptionSelected($event)"
       ></cc-drop-down-menu>
     </div>
   `,
   props: {
-    defaultOption: defaultOption
+    defaultOption: defaultOption,
+    onOptionSelected: actions.onOptionSelected
   }
 }))
 

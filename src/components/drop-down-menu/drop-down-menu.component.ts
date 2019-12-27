@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MenuConfig } from './drop-down-menu.entities';
 import { trigger, transition, style, animate } from '@angular/animations';
 
@@ -19,25 +19,31 @@ import { trigger, transition, style, animate } from '@angular/animations';
     ])
   ]
 })
-export class DropDownMenuComponent implements OnInit {
+export class DropDownMenuComponent {
 
   private static OPTION_HEIGHT = 50;
 
   @Input()
   public config: MenuConfig;
 
-  @Input()
-  public menuPosX = 0;
+  @Output()
+  public optionSelected: EventEmitter<string> = new EventEmitter<string>();
 
-  @Input()
-  public menuPosY = 0;
-
-  public menuHeight = 0;
   public menuOpen = false;
+  public index = -1;
 
-  ngOnInit() {
-    const numOptions = this.config.options.length;
+  public onOptionSelected(event) {
+    this.menuOpen = false;
+    this.optionSelected.emit(event);
+  }
 
-    this. menuHeight = DropDownMenuComponent.OPTION_HEIGHT * numOptions;
+  public onMouseLeave() {
+    this.menuOpen = false;
+  }
+
+  public setFocusOption(event) {
+    if (event.key === 'ArrowDown') {
+      this.index = 0;
+    }
   }
 }
