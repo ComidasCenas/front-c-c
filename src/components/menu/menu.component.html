@@ -1,0 +1,15 @@
+<div
+  class="menu-options"
+  [ngStyle]="{'height.px': menuHeight, 'left.px': menuPosX, 'top.px': menuPosY}"
+  #menuFrame
+>
+  <cc-drop-down-option
+    *ngFor="let option of options; last as isLast; index as i"
+    [optionConfig] = "option"
+    [last]="isLast"
+    (optionFocus)="closeMenus(i)"
+    (optionSelected)="onOptionSelected($event)"
+    (setFocusNext)="onSetFocusNext($event)"
+    (setFocusPrev)="onSetFocusPrev($event)"
+  ></cc-drop-down-option>
+</div>

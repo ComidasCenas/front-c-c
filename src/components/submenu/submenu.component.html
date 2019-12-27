@@ -2,9 +2,10 @@
 [ngStyle]="{'height.px': heightCalculated, 'left.px': _posX, 'top.px': posY}"
 >
  <cc-drop-down-option 
- *ngFor="let option of subMenuOptions; last as isLast"
+ *ngFor="let option of subMenuOptions; last as isLast; index as i"
  [optionConfig] = "option"
  [last] = "isLast"
  (optionSelected)="optionSelected($event)"
+ (optionFocus)="setIndexFocus(i)"
  ></cc-drop-down-option>
 </div>

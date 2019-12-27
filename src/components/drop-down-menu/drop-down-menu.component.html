@@ -1,3 +1,15 @@
-<button class="menu-button">
-  <img src="assets/images/menu.png" alt="menu button" srcset="">
+<button
+  class="menu-button"
+  (click)="menuOpen = !menuOpen"
+  (keyup)="setFocusOption($event)"
+>
+  <img src="{{config.icon}}" alt="menu button" srcset="">
 </button>
+<cc-menu
+  [options]="config.options"
+  [focusOption]="index"
+  *ngIf="menuOpen"
+  (mouseleave)="onMouseLeave($event)"
+  (optionSelected)="onOptionSelected($event)"
+  [@openCloseMenu]
+></cc-menu>

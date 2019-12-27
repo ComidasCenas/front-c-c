@@ -3,14 +3,6 @@ $accent-color: var(--accent-color, white);
 $mainFont: var(--font-family, "Gilroy-ligth");
 $font-size: var(--normal-font-size, 14px);
 
-.menu-button {
-  cursor: pointer;
-}
-
-.menu-button:focus {
-  border: 1px solid $primary-color;
-}
-
 .menu-options {
   position: absolute;
   background-color: $primary-color;
@@ -18,14 +10,4 @@ $font-size: var(--normal-font-size, 14px);
   z-index: 99;
   border-radius: 4px;
   padding: 0px 18px 14px 11px;
-}
-
-.menu-button:focus {
-  outline: none;
-}
-
-@media(min-width: 700px) {
-  .menu-button {
-    border: 0px;
-  }
 }
