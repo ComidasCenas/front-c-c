@@ -10,7 +10,7 @@ import { Option, DropDownOptionComponent } from '../drop-down-option';
 })
 export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
   
-  private static WIDTH = 125;
+  private static WIDTH = 101;
   private static MENU_PADDING = 11;
   private static SUBMENU_PADDING = (14 + 16);
   private static OPTION_HEIGHT = 50;

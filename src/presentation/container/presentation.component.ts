@@ -7,6 +7,7 @@ import { MenuConfig } from 'src/components';
   styleUrls: ['./presentation.component.scss']
 })
 export class PresentationComponent {
+  public logo = 'assets/images/logo.png';
   public menuConfig: MenuConfig = {
     icon: 'assets/images/menu.png',
     options: [

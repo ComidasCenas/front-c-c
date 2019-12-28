@@ -5,12 +5,14 @@ import { DropDownMenuComponent } from './drop-down-menu';
 import { DropDownOptionComponent } from './drop-down-option';
 import { SubmenuComponent } from './submenu';
 import { MenuComponent } from './menu';
+import { NavbarComponent } from './nav-bar';
 
 const components = [
   DropDownMenuComponent,
   DropDownOptionComponent,
   SubmenuComponent,
-  MenuComponent
+  MenuComponent,
+  NavbarComponent
 ]
 
 @NgModule({
